@@ -111,3 +111,16 @@ class HelloWorld extends AggregateProgram with StandardSensors with ScafiAlchemi
   }
 }
 ```
+
+## On this version and past versions
+
+I will try to keep this repository aligned with the latest versions of scafi and Alchemist.
+
+However, I have also set up different branches to "freeze" particular project configurations that have proven to work.
+These can be checked out through the usual git branch mechanism, e.g.:
+
+`git checkout scafi-0.3.2-alchemist-9.2.1`
+
+Available branches/configurations:
+
+- `scafi-0.3.2-alchemist-9.2.1`
