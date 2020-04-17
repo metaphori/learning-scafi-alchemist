@@ -1,24 +1,10 @@
 # Goal is to show reactivity to spikes of load, withstanding leader failures, and the benefit of an updated metric
 the_plots_labels:
   - Time                 #0
-  - '# nodes'
-  - '# nodes at risk'
-  - '# nodes overcrowded'
-  - '# nodes warned'
-  - '# nodes monitored'  #5
-  - '# nodes monitor ok'
-  - '# nodes oracle ok'
-  - '# difference'
-  - '# false positives'
-  - '# false negatives' # 10
-  - '# dispersal'
-  - 'neighbour variability' # numNbrsDelta
-  - '# different nbrs'
+  - 'g (sum)'
+  - 'g (mean)'
 the_plots_formats:
-  - [0,5,2,3,11]
-  - [0,5,6,7]
-  - [0,5,8]
-  - [0,9,10]
+  - [0,1,2]
   #- [0,11,12,13]
 #  - [0,2,3,4,5]
 #y_labels: ['# of requests', '# of requests','','% of utilization of workers']
@@ -26,9 +12,7 @@ the_plots_formats:
 #  - errors
 line_widths:
   - [2,2,2,2,2,2,2,2,2,2,2]
-default_colors: &default_colors ["black", "black", "orange","red","yellow",
-                                 "black", "blue","red",
-                                 "red", "magenta", "orange", "green", "brown"]
+default_colors: &default_colors ["black", "red", "green"]
 the_plots_colors:
   - *default_colors
 legend_position:

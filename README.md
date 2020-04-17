@@ -54,6 +54,21 @@ java -Xmx2524m -cp "build/libs/<MYFATJAR>.jar" \
   -t 100 -p 1 -v &> exec.txt &
 ```
 
+You can also use some IDE (such as Eclipse or IntelliJ Idea).
+In IntelliJ, you can create a run configuration of type `Application`
+that looks like the following.
+
+![](assets/imgs/intellij-run-configuration.png)
+
+You basically have to pass arguments to the Java program that 
+ leverages main class `it.unibo.alchemist.Alchemist`.
+Your project must be properly imported and synchronised via Gradle;
+ the Scala SDK must be properly set up, as well as the JDK Runtime.
+If everything works ok, you should be able to see the following simulation,
+which shows a gradient computation on a simulated network situated in the map of Vienna.
+
+![](assets/imgs/gradient-vienna.png)
+
 ### Scafi
 
 The simulation descriptor must indicate `incarnation: scafi`
@@ -82,11 +97,17 @@ package it.unibo.casestudy
 import it.unibo.alchemist.model.implementations.molecules.SimpleMolecule
 import it.unibo.alchemist.model.scafi.ScafiIncarnationForAlchemist._
 
-class HelloWorld extends AggregateProgram with StandardSensors with Gradients {
+class HelloWorld extends AggregateProgram with StandardSensors with ScafiAlchemistSupport
+  with Gradients {
   override def main(): Any = {
-    val x = node.get[Int]("prova")
-    node.put("prova2", x+1)
-    classicGradient(mid==100)
+    // Access to node state through "molecule"
+    val x = if(node.has("prova")) node.get[Int]("prova") else 1
+    // An aggregate operation
+    val g = classicGradient(mid==100)
+    // Write access to node state
+    node.put("g", g)
+    // Return value of the program
+    g
   }
 }
 ```
